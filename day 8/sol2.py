@@ -1,9 +1,20 @@
-import numpy as np
+from functools import reduce
 
 DIR_MAP = {
     'L': 0,
     'R': 1
 }
+
+
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+
+
+def lcm(a, b):
+    return (a * b) / gcd(a, b)
+
 
 with open('input.txt') as f:
     instructions = f.readline().strip()
@@ -26,4 +37,4 @@ with open('input.txt') as f:
         loops.append(nodes_visited)
 
     print(loops)
-    print(np.lcm.reduce(loops))
+    print(reduce(lcm, loops))
